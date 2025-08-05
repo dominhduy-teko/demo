@@ -331,40 +331,40 @@ export default function Dashboard() {
                 <div className="flex-1 overflow-y-auto p-6">
                     {/* Overview Tab */}
                     {activeTab === "overview" && (
-                        <div className="space-y-6">
+                        <div className="space-y-8">
                             {/* Stats Cards */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                <Card className="text-center">
-                                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <i className="ri-robot-line text-xl text-blue-600"></i>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                                <Card className="text-center p-6">
+                                    <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i className="ri-robot-line text-2xl text-blue-600"></i>
                                     </div>
-                                    <div className="text-3xl font-bold text-blue-600 mb-1">
+                                    <div className="text-2xl lg:text-3xl font-bold text-blue-600 mb-2">
                                         {chatbots.length}
                                     </div>
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm lg:text-base text-gray-600">
                                         Tổng Chatbot
                                     </div>
                                 </Card>
-                                <Card className="text-center">
-                                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <i className="ri-play-circle-line text-xl text-green-600"></i>
+                                <Card className="text-center p-6">
+                                    <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i className="ri-play-circle-line text-2xl text-green-600"></i>
                                     </div>
-                                    <div className="text-3xl font-bold text-green-600 mb-1">
+                                    <div className="text-2xl lg:text-3xl font-bold text-green-600 mb-2">
                                         {
                                             chatbots.filter(
                                                 (bot) => bot.status === "active"
                                             ).length
                                         }
                                     </div>
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm lg:text-base text-gray-600">
                                         Đang Hoạt động
                                     </div>
                                 </Card>
-                                <Card className="text-center">
-                                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <i className="ri-question-answer-line text-xl text-purple-600"></i>
+                                <Card className="text-center p-6 sm:col-span-2 lg:col-span-1">
+                                    <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i className="ri-question-answer-line text-2xl text-purple-600"></i>
                                     </div>
-                                    <div className="text-3xl font-bold text-purple-600 mb-1">
+                                    <div className="text-2xl lg:text-3xl font-bold text-purple-600 mb-2">
                                         {chatbots
                                             .reduce(
                                                 (sum, bot) =>
@@ -373,56 +373,42 @@ export default function Dashboard() {
                                             )
                                             .toLocaleString()}
                                     </div>
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm lg:text-base text-gray-600">
                                         Tổng Câu hỏi
-                                    </div>
-                                </Card>
-                                <Card className="text-center">
-                                    <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <i className="ri-database-2-line text-xl text-orange-600"></i>
-                                    </div>
-                                    <div className="text-3xl font-bold text-orange-600 mb-1">
-                                        {
-                                            dataFiles.filter(
-                                                (file) =>
-                                                    file.status === "ready"
-                                            ).length
-                                        }
-                                    </div>
-                                    <div className="text-sm text-gray-600">
-                                        File Dữ liệu
                                     </div>
                                 </Card>
                             </div>
 
                             {/* Recent Activity */}
-                            <div className="grid lg:grid-cols-2 gap-6">
+                            <div className="space-y-6">
                                 <Card
                                     title="Chatbot gần đây"
                                     description="Hoạt động của các chatbot"
+                                    className="w-full"
                                 >
-                                    <div className="space-y-4">
-                                        {chatbots.slice(0, 3).map((bot) => (
+                                    <div className="space-y-2">
+                                        {chatbots.slice(0, 4).map((bot) => (
                                             <div
                                                 key={bot.id}
-                                                className="flex items-center justify-between py-2"
+                                                className="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition-colors border border-gray-100"
                                             >
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                                        <i className="ri-robot-line text-sm text-blue-600"></i>
+                                                <div className="flex items-center gap-4 flex-1 min-w-0">
+                                                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                                        <i className="ri-robot-line text-lg text-blue-600"></i>
                                                     </div>
-                                                    <div>
-                                                        <div className="font-medium text-gray-900">
+                                                    <div className="min-w-0 flex-1">
+                                                        <div className="font-semibold text-gray-900 truncate">
                                                             {bot.name}
                                                         </div>
-                                                        <div className="text-sm text-gray-500">
-                                                            {bot.totalQuestions}{" "}
-                                                            câu hỏi
+                                                        <div className="text-sm text-gray-500 mt-1">
+                                                            {bot.totalQuestions.toLocaleString()}{" "}
+                                                            câu hỏi •{" "}
+                                                            {bot.createdAt}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <span
-                                                    className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                                                    className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ml-4 ${getStatusColor(
                                                         bot.status
                                                     )}`}
                                                 >
@@ -433,7 +419,7 @@ export default function Dashboard() {
                                     </div>
                                 </Card>
 
-                                <Card
+                                {/* <Card
                                     title="Dữ liệu mới nhất"
                                     description="File dữ liệu được tải lên gần đây"
                                 >
@@ -467,7 +453,7 @@ export default function Dashboard() {
                                             </div>
                                         ))}
                                     </div>
-                                </Card>
+                                </Card> */}
                             </div>
                         </div>
                     )}

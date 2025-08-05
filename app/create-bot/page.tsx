@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import Image from "next/image";
 
 export default function CreateBot() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -272,9 +273,13 @@ export default function CreateBot() {
                 <div className="w-64 bg-white border-r border-gray-200 flex-shrink-0">
                     <div className="p-6">
                         <Link href="/" className="flex items-center space-x-2">
-                            <div className="text-2xl font-bold text-blue-600 font-['Pacifico']">
-                                logo
-                            </div>
+                            <Image
+                                src="/image.png"
+                                alt="Logo"
+                                width={40}
+                                height={40}
+                                className="object-contain"
+                            />
                         </Link>
                     </div>
                 </div>
