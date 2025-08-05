@@ -223,12 +223,18 @@ export default function CreateBot() {
             if (field === "agentTemplate") {
                 const template = agentTemplates.find((t) => t.id === value);
                 if (template) {
-                    Object.keys(template.prompts).forEach((promptKey) => {
-                        newData[promptKey as keyof typeof newData] =
-                            template.prompts[
-                                promptKey as keyof typeof template.prompts
-                            ];
-                    });
+                    // Type-safe update of prompts
+                    const prompts = template.prompts;
+                    Object.entries(prompts).forEach(
+                        ([promptKey, promptValue]) => {
+                            if (
+                                promptKey in newData &&
+                                typeof promptValue === "string"
+                            ) {
+                                (newData as any)[promptKey] = promptValue;
+                            }
+                        }
+                    );
                 }
             }
 
@@ -338,9 +344,23 @@ export default function CreateBot() {
                                                 "Bạn là một trợ lý AI thân thiện và chuyên nghiệp. Hãy trò chuyện một cách tự nhiên và hỗ trợ người dùng tốt nhất có thể.",
                                             summaryPrompt:
                                                 "Tóm tắt nội dung cuộc hội thoại một cách súc tích và đầy đủ thông tin quan trọng.",
-                                            embeddingSize: 1536,
-                                            chunkSize: 1000,
-                                            overlap: 200,
+                                            embeddingModel: "bge-m3",
+                                            embeddingSize: 1024,
+                                            chunkSize: 512,
+                                            overlap: 100,
+                                            similarityThreshold: 0.7,
+                                            topKResults: 5,
+                                            rerankStrategy: "similarity",
+                                            temperature: 0.7,
+                                            topP: 0.9,
+                                            topK: 40,
+                                            maxTokens: 1024,
+                                            stopSequences: [
+                                                "[STOP]",
+                                                "###",
+                                                "Human:",
+                                                "Assistant:",
+                                            ],
                                         });
                                     }}
                                     className="w-full"
