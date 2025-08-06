@@ -783,37 +783,6 @@ export default function CreateBot() {
                                                 và sử dụng cài đặt mặc định.
                                             </p>
                                         </div>
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => {
-                                                // Reset tất cả về giá trị mặc định
-                                                setFormData((prev) => ({
-                                                    ...prev,
-                                                    temperature: 0.7,
-                                                    topP: 0.9,
-                                                    topK: 40,
-                                                    maxTokens: 1024,
-                                                    stopSequences: [
-                                                        "[STOP]",
-                                                        "###",
-                                                        "Human:",
-                                                        "Assistant:",
-                                                    ],
-                                                    embeddingModel: "bge-m3",
-                                                    embeddingSize: 1024,
-                                                    chunkSize: 512,
-                                                    overlap: 100,
-                                                    similarityThreshold: 0.7,
-                                                    topKResults: 5,
-                                                    rerankStrategy:
-                                                        "similarity",
-                                                }));
-                                            }}
-                                            className="flex items-center gap-2"
-                                        >
-                                            <i className="ri-restart-line text-sm"></i>
-                                            Set to Default
-                                        </Button>
                                     </div>
 
                                     {/* Display selected template info */}
