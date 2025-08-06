@@ -386,9 +386,13 @@ export default function CreateBot() {
             <div className="w-64 bg-white border-r border-gray-200 flex-shrink-0">
                 <div className="p-6">
                     <Link href="/" className="flex items-center space-x-2">
-                        <div className="text-2xl font-bold text-blue-600 font-['Pacifico']">
-                            logo
-                        </div>
+                        <Image
+                            src="/image.png"
+                            alt="Logo"
+                            width={40}
+                            height={40}
+                            className="object-contain"
+                        />
                     </Link>
                 </div>
 
@@ -767,35 +771,98 @@ export default function CreateBot() {
                             {/* Step 3: Advanced Configuration */}
                             {currentStep === 3 && (
                                 <div>
-                                    <h2 className="text-2xl font-bold mb-2">
-                                        Cấu hình nâng cao
-                                    </h2>
-                                    <p className="text-gray-600 mb-6">
-                                        <i className="ri-information-line mr-2"></i>
-                                        Tùy chỉnh chi tiết tham số AI. Người
-                                        dùng cơ bản có thể bỏ qua và sử dụng cài
-                                        đặt mặc định.
-                                    </p>
+                                    <div className="flex items-center justify-between mb-6">
+                                        <div>
+                                            <h2 className="text-2xl font-bold mb-2">
+                                                Cấu hình nâng cao
+                                            </h2>
+                                            <p className="text-gray-600">
+                                                <i className="ri-information-line mr-2"></i>
+                                                Tùy chỉnh chi tiết tham số AI.
+                                                Người dùng cơ bản có thể bỏ qua
+                                                và sử dụng cài đặt mặc định.
+                                            </p>
+                                        </div>
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => {
+                                                // Reset tất cả về giá trị mặc định
+                                                setFormData((prev) => ({
+                                                    ...prev,
+                                                    temperature: 0.7,
+                                                    topP: 0.9,
+                                                    topK: 40,
+                                                    maxTokens: 1024,
+                                                    stopSequences: [
+                                                        "[STOP]",
+                                                        "###",
+                                                        "Human:",
+                                                        "Assistant:",
+                                                    ],
+                                                    embeddingModel: "bge-m3",
+                                                    embeddingSize: 1024,
+                                                    chunkSize: 512,
+                                                    overlap: 100,
+                                                    similarityThreshold: 0.7,
+                                                    topKResults: 5,
+                                                    rerankStrategy:
+                                                        "similarity",
+                                                }));
+                                            }}
+                                            className="flex items-center gap-2"
+                                        >
+                                            <i className="ri-restart-line text-sm"></i>
+                                            Set to Default
+                                        </Button>
+                                    </div>
 
                                     {/* Display selected template info */}
 
                                     <div className="space-y-8">
                                         {/* LLM Model Configuration */}
                                         <div className="border-t pt-8">
-                                            <div className="flex items-center gap-3 mb-6">
-                                                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                                                    <i className="ri-cpu-line text-gray-600 text-lg"></i>
+                                            <div className="flex items-center justify-between mb-6">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                        <i className="ri-cpu-line text-gray-600 text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h3 className="text-lg font-semibold text-gray-900">
+                                                            Cấu hình LLM
+                                                            Parameters
+                                                        </h3>
+                                                        <p className="text-sm text-gray-600">
+                                                            Tùy chỉnh các tham
+                                                            số để điều khiển
+                                                            hành vi sinh văn bản
+                                                            của AI
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h3 className="text-lg font-semibold text-gray-900">
-                                                        Cấu hình LLM Parameters
-                                                    </h3>
-                                                    <p className="text-sm text-gray-600">
-                                                        Tùy chỉnh các tham số để
-                                                        điều khiển hành vi sinh
-                                                        văn bản của AI
-                                                    </p>
-                                                </div>
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        // Reset LLM parameters về mặc định
+                                                        setFormData((prev) => ({
+                                                            ...prev,
+                                                            temperature: 0.7,
+                                                            topP: 0.9,
+                                                            topK: 40,
+                                                            maxTokens: 1024,
+                                                            stopSequences: [
+                                                                "[STOP]",
+                                                                "###",
+                                                                "Human:",
+                                                                "Assistant:",
+                                                            ],
+                                                        }));
+                                                    }}
+                                                    className="flex items-center gap-1 text-xs"
+                                                >
+                                                    <i className="ri-restart-line text-xs"></i>
+                                                    Reset LLM parameters
+                                                </Button>
                                             </div>
 
                                             <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6">
@@ -1272,22 +1339,47 @@ export default function CreateBot() {
 
                                         {/* Embedding Model Configuration */}
                                         <div className="border-t pt-8">
-                                            <div className="flex items-center gap-3 mb-6">
-                                                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                                                    <i className="ri-brain-line text-gray-600 text-lg"></i>
+                                            <div className="flex items-center justify-between mb-6">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                        <i className="ri-brain-line text-gray-600 text-lg"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h3 className="text-lg font-semibold text-gray-900">
+                                                            Cấu hình Embedding &
+                                                            Vector Database
+                                                        </h3>
+                                                        <p className="text-sm text-gray-600">
+                                                            Thiết lập mô hình
+                                                            embedding và cách xử
+                                                            lý dữ liệu để tìm
+                                                            kiếm thông tin
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h3 className="text-lg font-semibold text-gray-900">
-                                                        Cấu hình Embedding &
-                                                        Vector Database
-                                                    </h3>
-                                                    <p className="text-sm text-gray-600">
-                                                        Thiết lập mô hình
-                                                        embedding và cách xử lý
-                                                        dữ liệu để tìm kiếm
-                                                        thông tin
-                                                    </p>
-                                                </div>
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        // Reset RAG parameters về mặc định
+                                                        setFormData((prev) => ({
+                                                            ...prev,
+                                                            embeddingModel:
+                                                                "bge-m3",
+                                                            embeddingSize: 1024,
+                                                            chunkSize: 512,
+                                                            overlap: 100,
+                                                            similarityThreshold: 0.7,
+                                                            topKResults: 5,
+                                                            rerankStrategy:
+                                                                "similarity",
+                                                        }));
+                                                    }}
+                                                    className="flex items-center gap-1 text-xs"
+                                                >
+                                                    <i className="ri-restart-line text-xs"></i>
+                                                    Reset parameters
+                                                </Button>
                                             </div>
 
                                             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
@@ -1809,16 +1901,6 @@ export default function CreateBot() {
                                             <div className="grid grid-cols-2 gap-4 text-sm">
                                                 <div>
                                                     <span className="text-blue-700 font-medium">
-                                                        Template Agent:
-                                                    </span>
-                                                    <p className="text-blue-600">
-                                                        {
-                                                            currentAgentTemplate?.name
-                                                        }
-                                                    </p>
-                                                </div>
-                                                <div>
-                                                    <span className="text-blue-700 font-medium">
                                                         Mô hình LLM:
                                                     </span>
                                                     <p className="text-blue-600">
@@ -1831,18 +1913,7 @@ export default function CreateBot() {
                                                         }
                                                     </p>
                                                 </div>
-                                                <div>
-                                                    <span className="text-blue-700 font-medium">
-                                                        Số lượng Agent:
-                                                    </span>
-                                                    <p className="text-blue-600">
-                                                        {
-                                                            currentAgentTemplate
-                                                                ?.agents.length
-                                                        }{" "}
-                                                        Agent
-                                                    </p>
-                                                </div>
+
                                                 <div>
                                                     <span className="text-blue-700 font-medium">
                                                         Embedding Size:

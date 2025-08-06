@@ -86,16 +86,10 @@ export default function ChatbotDetail({
                 {/* Sidebar */}
                 <div className="w-64 bg-gray-50 border-r border-gray-200 flex-shrink-0">
                     <div className="p-6 border-b border-gray-200">
-                        <div className="flex items-center justify-between">
+                        <div>
                             <h2 className="text-lg font-semibold text-gray-900">
                                 Cài đặt Chatbot
                             </h2>
-                            <button
-                                onClick={onClose}
-                                className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"
-                            >
-                                <i className="ri-close-line text-xl"></i>
-                            </button>
                         </div>
                         <div className="mt-2 text-sm text-gray-600 truncate">
                             {bot.name}
@@ -142,6 +136,9 @@ export default function ChatbotDetail({
                                 </p>
                             </div>
                             <div className="flex items-center gap-3">
+                                <Button variant="outline" onClick={onClose}>
+                                    Cancel
+                                </Button>
                                 {isEditing ? (
                                     <>
                                         <Button
@@ -157,7 +154,7 @@ export default function ChatbotDetail({
                                 ) : (
                                     <Button onClick={() => setIsEditing(true)}>
                                         <i className="ri-edit-line w-4 h-4 mr-2"></i>
-                                        Chỉnh sửa
+                                        Update
                                     </Button>
                                 )}
                             </div>
@@ -253,7 +250,7 @@ export default function ChatbotDetail({
                                             )}
                                         </div>
 
-                                        <div className="grid grid-cols-2 gap-4">
+                                        <div className="grid gap-4">
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                                     Mô hình AI
@@ -286,45 +283,6 @@ export default function ChatbotDetail({
                                                 ) : (
                                                     <div className="px-3 py-2 bg-gray-50 rounded-lg">
                                                         {bot.model}
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Template
-                                                </label>
-                                                {isEditing ? (
-                                                    <select
-                                                        value={
-                                                            editedBot.template
-                                                        }
-                                                        onChange={(e) =>
-                                                            setEditedBot({
-                                                                ...editedBot,
-                                                                template:
-                                                                    e.target
-                                                                        .value,
-                                                            })
-                                                        }
-                                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                                    >
-                                                        <option value="Hỗ trợ khách hàng">
-                                                            Hỗ trợ khách hàng
-                                                        </option>
-                                                        <option value="FAQ Sản phẩm">
-                                                            FAQ Sản phẩm
-                                                        </option>
-                                                        <option value="Hướng dẫn kỹ thuật">
-                                                            Hướng dẫn kỹ thuật
-                                                        </option>
-                                                        <option value="Chính sách công ty">
-                                                            Chính sách công ty
-                                                        </option>
-                                                    </select>
-                                                ) : (
-                                                    <div className="px-3 py-2 bg-gray-50 rounded-lg">
-                                                        {bot.template}
                                                     </div>
                                                 )}
                                             </div>
@@ -387,7 +345,7 @@ export default function ChatbotDetail({
 
                                 {/* Statistics */}
                                 <Card title="Thống kê hoạt động">
-                                    <div className="grid grid-cols-3 gap-6">
+                                    <div className="grid grid-cols-2 gap-6">
                                         <div className="text-center">
                                             <div className="text-3xl font-bold text-blue-600 mb-1">
                                                 {bot.totalQuestions.toLocaleString()}
@@ -396,14 +354,7 @@ export default function ChatbotDetail({
                                                 Tổng câu hỏi
                                             </div>
                                         </div>
-                                        <div className="text-center">
-                                            <div className="text-3xl font-bold text-green-600 mb-1">
-                                                {bot.accuracy}%
-                                            </div>
-                                            <div className="text-sm text-gray-600">
-                                                Độ chính xác
-                                            </div>
-                                        </div>
+
                                         <div className="text-center">
                                             <div className="text-3xl font-bold text-purple-600 mb-1">
                                                 {Math.floor(
@@ -449,8 +400,6 @@ export default function ChatbotDetail({
                                             <p className="text-blue-700 text-sm">
                                                 Bot đã được huấn luyện với{" "}
                                                 {bot.totalQuestions.toLocaleString()}{" "}
-                                                câu hỏi và đạt độ chính xác{" "}
-                                                {bot.accuracy}%.
                                             </p>
                                         </div>
                                     </div>

@@ -502,84 +502,79 @@ export default function Dashboard() {
                             </Card>
 
                             {/* Chatbots List */}
-                            <div className="grid gap-6">
+                            <div className="grid gap-4">
                                 {filteredChatbots.map((bot) => (
-                                    <Card key={bot.id}>
-                                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                                            <div className="flex-1">
-                                                <div className="flex items-start justify-between mb-3">
-                                                    <div>
-                                                        <h3 className="text-xl font-semibold text-gray-900 mb-1">
-                                                            {bot.name}
-                                                        </h3>
-                                                        <p className="text-gray-600 text-sm">
-                                                            {bot.description}
-                                                        </p>
-                                                    </div>
-                                                    <span
-                                                        className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                                                            bot.status
-                                                        )}`}
-                                                    >
-                                                        {getStatusText(
-                                                            bot.status
-                                                        )}
-                                                    </span>
+                                    <Card
+                                        key={bot.id}
+                                        className="hover:shadow-md transition-shadow"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            {/* Left side - Bot info */}
+                                            <div className="flex items-center gap-4 flex-1 min-w-0">
+                                                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                    <i className="ri-robot-line text-xl text-blue-600"></i>
                                                 </div>
 
-                                                <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
-                                                    <div>
-                                                        <div className="text-gray-500">
-                                                            Mô hình
-                                                        </div>
-                                                        <div className="font-medium text-gray-900">
-                                                            {bot.model}
-                                                        </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="flex items-center gap-3 mb-1">
+                                                        <h3 className="text-lg font-semibold text-gray-900 truncate">
+                                                            {bot.name}
+                                                        </h3>
+                                                        <span
+                                                            className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ${getStatusColor(
+                                                                bot.status
+                                                            )}`}
+                                                        >
+                                                            {getStatusText(
+                                                                bot.status
+                                                            )}
+                                                        </span>
                                                     </div>
-                                                    <div>
-                                                        <div className="text-gray-500">
-                                                            Ngày tạo
+                                                    <p className="text-gray-600 text-sm mb-2 line-clamp-1">
+                                                        {bot.description}
+                                                    </p>
+
+                                                    <div className="flex items-center gap-6 text-xs text-gray-500">
+                                                        <div className="flex items-center gap-1">
+                                                            <i className="ri-cpu-line"></i>
+                                                            <span>
+                                                                {bot.model}
+                                                            </span>
                                                         </div>
-                                                        <div className="font-medium text-gray-900">
-                                                            {bot.createdAt}
+                                                        <div className="flex items-center gap-1">
+                                                            <i className="ri-calendar-line"></i>
+                                                            <span>
+                                                                {bot.createdAt}
+                                                            </span>
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                        {/* <div className="text-gray-500">
-                                                            Độ chính xác
+                                                        <div className="flex items-center gap-1">
+                                                            <i className="ri-file-excel-line"></i>
+                                                            <span className="truncate max-w-32">
+                                                                {bot.dataSource}
+                                                            </span>
                                                         </div>
-                                                        <div className="font-medium text-gray-900">
-                                                            {bot.accuracy}%
-                                                        </div> */}
-                                                    </div>
-                                                    <div>
-                                                        <div className="text-gray-500">
-                                                            Dữ liệu
-                                                        </div>
-                                                        <div className="font-medium text-gray-900 truncate">
-                                                            {bot.dataSource}
+                                                        <div className="flex items-center gap-1">
+                                                            <i className="ri-question-answer-line"></i>
+                                                            <span>
+                                                                {bot.totalQuestions.toLocaleString()}{" "}
+                                                                câu hỏi
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="flex items-center gap-2 mt-4 lg:mt-0 lg:ml-6">
+                                            {/* Right side - Actions */}
+                                            <div className="flex items-center gap-2 flex-shrink-0 ml-4">
                                                 <Link href={`/chat/${bot.id}`}>
                                                     <Button
                                                         variant="outline"
                                                         size="sm"
                                                     >
-                                                        <i className="ri-chat-3-line w-4 h-4 flex items-center justify-center mr-2"></i>
+                                                        <i className="ri-chat-3-line mr-2"></i>
                                                         Test
                                                     </Button>
                                                 </Link>
-                                                {/* <Button
-                                                    variant="outline"
-                                                    size="sm"
-                                                >
-                                                    <i className="ri-bar-chart-line w-4 h-4 flex items-center justify-center mr-2"></i>
-                                                    Thống kê
-                                                </Button> */}
                                                 <Button
                                                     variant="outline"
                                                     size="sm"
@@ -587,7 +582,7 @@ export default function Dashboard() {
                                                         handleOpenBotDetail(bot)
                                                     }
                                                 >
-                                                    <i className="ri-settings-3-line w-4 h-4 flex items-center justify-center mr-2"></i>
+                                                    <i className="ri-settings-3-line mr-2"></i>
                                                     Cài đặt
                                                 </Button>
                                                 <button
@@ -596,9 +591,10 @@ export default function Dashboard() {
                                                             bot.id
                                                         )
                                                     }
-                                                    className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded cursor-pointer"
+                                                    className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors"
+                                                    title="Xóa chatbot"
                                                 >
-                                                    <i className="ri-delete-bin-line w-4 h-4 flex items-center justify-center"></i>
+                                                    <i className="ri-delete-bin-line"></i>
                                                 </button>
                                             </div>
                                         </div>
