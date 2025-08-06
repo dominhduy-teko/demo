@@ -545,14 +545,6 @@ export default function Dashboard() {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <div className="text-gray-500">
-                                                            Template
-                                                        </div>
-                                                        <div className="font-medium text-gray-900">
-                                                            {bot.template}
-                                                        </div>
-                                                    </div>
-                                                    <div>
                                                         {/* <div className="text-gray-500">
                                                             Độ chính xác
                                                         </div>
